@@ -1,8 +1,8 @@
 class Box {
-    constructor(x, y, s, c) {
+    constructor(x, y, size, color) {
         this.pos = createVector(x, y);
-        this.size = s || 50;
-        this.c = c || this.getNewColor();
+        this.size = size || 40;
+        this.c = color || this.getNewColor();
 
         this.baseSpeed = 1;
         this.maxSpeed = 1.10;
@@ -22,16 +22,16 @@ class Box {
     }
 
     hit() {
-        if (this.pos.x < 0 + this.size || this.pos.x > width - this.size) {
+        if (this.pos.x - this.size < 0 || this.pos.x + this.size > width) {
             this.vel.x *= -1;
             this.vel.x += random(-0.1, 0.1);
-            this.move();
+            this.pos.x = (this.pos.x <= 0 + this.size) ? this.size + 1 : width - this.size - 1;
             this.colorSwitch();
         }
-        if (this.pos.y < 0 + this.size || this.pos.y > height - this.size) {
+        if (this.pos.y - this.size < 0 || this.pos.y + this.size > height) {
             this.vel.y *= -1;
             this.vel.y += random(-0.1, 0.1);
-            this.move();
+            this.pos.y = (this.pos.y - this.size < 0) ? this.size + 1 : height - this.size - 1;
             this.colorSwitch();
         }
     }
