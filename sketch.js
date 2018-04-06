@@ -6,7 +6,7 @@ function setup() {
 	rectMode(CENTER);
 	cnv.mouseClicked(makeBox);
 
-	makeBox();
+	box.push(new Box(width/2, height/2));
 }
 
 function draw() {
