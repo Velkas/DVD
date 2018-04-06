@@ -26,7 +26,7 @@ function draw() {
 		text("CLICK", width/2, height/2);
 	}
 
-	slideVal.html(slide.value());
+	slideVal.html("Box Size: " + slide.value());
 
 	for (let b = box.length - 1; b > 0; b--) {
 		box[b].update();
