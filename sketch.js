@@ -8,6 +8,7 @@ function setup() {
 	cnv = createCanvas(800, 800);
 	rectMode(CENTER);
 	cnv.mouseClicked(makeBox);
+	createP('');
 	slide = createSlider(1, 50, 40, 1);
 	slideVal = createP(slide.value());
 	slide.mouseMoved(changeSize);

@@ -1,8 +1,10 @@
 class Box {
-    constructor(x, y, size, color) {
+    constructor(x, y, size) {
         this.pos = createVector(x, y);
         this.size = size || 40;
-        this.c = color || this.getNewColor();
+        this.c = this.getNewColor();
+        this.lastC;
+        this.curC;
 
         this.baseSpeed = 1;
         this.maxSpeed = 1.10;
@@ -42,10 +44,10 @@ class Box {
     }
 
     colorSwitch() {
-        let oldC = this.c;
+        this.lastC = this.curC
         let newC = this.getNewColor();
-        if (newC === oldC) {
-            newC = getNewColor();
+        while (this.lastC === this.curC) {
+            newC = this.getNewColor();
         }
         this.c = newC;
     }
@@ -55,24 +57,31 @@ class Box {
         switch (floor(random(0, 6))) {
             // ROYGBIV
             case 0:
+                this.curC = 0;
                 newColor = color(255, 0, 0);
                 break;
             case 1:
+                this.curC = 1;
                 newColor = color(255, 127, 0);
                 break;
             case 2:
+                this.curC = 2;
                 newColor = color(255, 255, 0);
                 break;
             case 3:
+                this.curC = 3;
                 newColor = color(0, 255, 0);
                 break;
             case 4:
+                this.curC = 4;
                 newColor = color(0, 0, 255);
                 break;
             case 5:
+                this.curC = 5;
                 newColor = color(75, 0, 130);
                 break;
             default:
+                this.curC = 6;
                 newColor = color(139, 0, 255);
                 break;
         }
