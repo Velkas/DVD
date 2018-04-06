@@ -2,7 +2,7 @@ class Box {
     constructor(x, y, s, c) {
         this.pos = createVector(x, y);
         this.size = s || 50;
-        this.c = c || color(255, 0, 0);
+        this.c = c || this.getNewColor();
 
         this.baseSpeed = 1;
         this.maxSpeed = 1.10;
