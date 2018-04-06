@@ -1,16 +1,27 @@
 let cnv;
-let box;
+let box = [];
 
 function setup() {
 	cnv = createCanvas(800, 800);
 	rectMode(CENTER);
-	box = new Box(width/2, height/2);
+	cnv.mouseClicked(makeBox);
+
+	makeBox();
 }
 
 function draw() {
 	cnv.background(0);
 
-	box.update();
-	box.show();
+	for (let b = box.length - 1; b > 0; b--) {
+		box[b].update();
+		box[b].show();
+	}
+}
 
+function makeBox() {
+	if (box.length > 20) {
+		box.splice(0, 1);
+	} else {
+		box.push(new Box(width/2, height/2));
+	}
 }

@@ -6,32 +6,32 @@ class Box {
 
         this.baseSpeed = 1;
         this.maxSpeed = 1.10;
-        this.minSpeed = 0.90;
+        this.minSpeed = -0.90;
         this.vel = createVector(random(-this.maxSpeed, this.maxSpeed), 
                                 random(-this.maxSpeed, this.maxSpeed));
     }
 
     move() {
-        // if (this.vel.x < this.minSpeed || this.vel.x > this.maxSpeed) {
-        //     this.vel.x = this.baseSpeed;
-        // }
-        // if (this.vel.y < this.minSpeed || this.vel.y > this.maxSpeed) {
-        //     this.vel.y = this.baseSpeed;
-        // }
+        if (this.vel.x < this.minSpeed) {
+            this.vel.x = this.minSpeed;
+        }
+        if (this.vel.y < this.minSpeed) {
+            this.vel.y = this.minSpeed;
+        }
         this.pos = p5.Vector.add(this.pos, this.vel);
     }
 
     hit() {
         if (this.pos.x < 0 + this.size || this.pos.x > width - this.size) {
-            console.log(this.vel);
             this.vel.x *= -1;
             this.vel.x += random(-0.1, 0.1);
+            this.move();
             this.colorSwitch();
         }
         if (this.pos.y < 0 + this.size || this.pos.y > height - this.size) {
-            console.log(this.vel);
             this.vel.y *= -1;
             this.vel.y += random(-0.1, 0.1);
+            this.move();
             this.colorSwitch();
         }
     }
@@ -44,7 +44,7 @@ class Box {
     colorSwitch() {
         let oldC = this.c;
         let newC = this.getNewColor();
-        while (newC === oldC) {
+        if (newC === oldC) {
             newC = getNewColor();
         }
         this.c = newC;
