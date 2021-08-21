@@ -8,6 +8,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
+  frameRate(60);
 
   box = new Box(width / 2, height / 2, img);
 }
