@@ -81,10 +81,13 @@ class Box {
     }
 
     image(this.img, this.pos.x, this.pos.y, this.size.x, this.size.y);
-    textSize(28);
-    fill(255);
-    strokeWeight(4);
-    stroke(0);
-    text(this.hitCount, this.pos.x + 10, this.pos.y + 32);
+    
+    if (this.hitCount > 0) {
+      textSize(32);
+      fill(255);
+      strokeWeight(4);
+      stroke(0);
+      text(this.hitCount, this.pos.x + 10, this.pos.y + 48);
+    }
   }
 }
