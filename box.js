@@ -4,8 +4,8 @@ class Box {
     this.img = img;
     this.size = createVector(this.img.width, this.img.height);
     this.hitCount = 0;
-    this.maxSpeed = 8;
-    this.minSpeed = -6;
+    this.maxSpeed = 3;
+    this.minSpeed = -3;
     this.vel = createVector(
       random(1) >= 0.5
         ? random(this.minSpeed * -1, this.maxSpeed) + random(-0.01, 0.01)
