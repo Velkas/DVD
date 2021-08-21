@@ -25,40 +25,40 @@ class Box {
   move() {
     // if x negative, make sure its not too slow or fast
     if (this.vel.x < 0) {
-      if (this.vel.x < this.minSpeed - 0.2) {
+      if (this.vel.x < this.minSpeed - 0.5) {
         this.vel.x = this.minSpeed;
       }
-      if (this.vel.x > this.minSpeed + 1.2) {
+      if (this.vel.x > this.minSpeed + 1.5) {
         this.vel.x = this.minSpeed + 1;
       }
     }
 
     // if x positive, make sure its not too slow or fast
     if (this.vel.x > 0) {
-      if (this.vel.x > this.maxSpeed + 0.2) {
+      if (this.vel.x > this.maxSpeed + 0.5) {
         this.vel.x = this.maxSpeed;
       }
-      if (this.vel.x < this.maxSpeed - 1.2) {
+      if (this.vel.x < this.maxSpeed - 1.5) {
         this.vel.x = this.maxSpeed - 1;
       }
     }
 
     // if y negative, make sure its not too slow or fast
     if (this.vel.y < 0) {
-      if (this.vel.y < this.minSpeed - 0.2) {
+      if (this.vel.y < this.minSpeed - 0.5) {
         this.vel.y = this.minSpeed;
       }
-      if (this.vel.y > this.minSpeed + 1.2) {
+      if (this.vel.y > this.minSpeed + 1.5) {
         this.vel.y = this.minSpeed + 1;
       }
     }
 
     // if y positive, make sure its not too slow or fast
     if (this.vel.y > 0) {
-      if (this.vel.y > this.maxSpeed + 0.2) {
+      if (this.vel.y > this.maxSpeed + 0.5) {
         this.vel.y = this.maxSpeed;
       }
-      if (this.vel.y < this.maxSpeed - 1.2) {
+      if (this.vel.y < this.maxSpeed - 1.5) {
         this.vel.y = this.maxSpeed - 1;
       }
     }
