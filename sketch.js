@@ -16,8 +16,8 @@ function setup() {
 
 function draw() {
   colorMode(RGB);
-
-  background(0, 255, 0);
+  clear();
+  //background(0, 0, 255, 0);
 
   box.update();
   box.show();

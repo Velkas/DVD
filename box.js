@@ -102,6 +102,7 @@ class Box {
   }
 
   blink() {
+    // reset the gif counter if its complete
     if (this.blinkCounter <= 0) {
       this.img.reset();
       this.blinkCounter = 45000;
