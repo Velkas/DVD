@@ -73,7 +73,7 @@ class Box {
     }
     if (this.flashing) {
       colorMode(HSB);
-      tint(this.tint, 127, 200);
+      tint(this.tint, 127, 255);
       this.tint = this.tint <= 1 ? (this.tint = 255) : (this.tint -= 10);
       this.counter -= 60;
     } else {
