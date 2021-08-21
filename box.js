@@ -7,7 +7,7 @@ class Box {
     this.maxSpeed = 3;
     this.minSpeed = -3;
     this.tint = 127;
-    this.counter = 3000;
+    this.counter = 6000;
     this.vel = createVector(
       random(1) >= 0.5
         ? random(this.minSpeed * -1, this.maxSpeed) + random(-0.01, 0.01)
@@ -67,13 +67,13 @@ class Box {
 
   show() {
     if (this.counter <= 0) {
-      this.counter = 3000;
+      this.counter = 6000;
       this.flashing = false;
       this.detecting = true;
     }
     if (this.flashing) {
       colorMode(HSB);
-      tint(this.tint, 127, 255);
+      tint(this.tint, 200, 255);
       this.tint = this.tint <= 1 ? (this.tint = 255) : (this.tint -= 10);
       this.counter -= 60;
     } else {
