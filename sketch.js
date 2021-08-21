@@ -6,7 +6,7 @@ let slideVal;
 let img;
 
 function preload() {
-  img = loadImage("maggie_dvd.png");
+  img = loadImage("/maggie_dvd.png");
 }
 
 function setup() {
