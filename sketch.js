@@ -10,6 +10,7 @@ function setup() {
   rectMode(CENTER);
   frameRate(60);
 
+  // add the one true maggs
   box = new Box(width / 2, height / 2, img);
 }
 

@@ -4,10 +4,11 @@ class Box {
     this.img = img;
     this.size = createVector(this.img.width, this.img.height);
     this.hitCount = 0;
-    this.maxSpeed = 3;
-    this.minSpeed = -3;
+    this.maxSpeed = 4;
+    this.minSpeed = -4;
     this.tint = 127;
     this.counter = 6000;
+    // starting direction should be random
     this.vel = createVector(
       random(1) >= 0.5
         ? random(this.minSpeed * -1, this.maxSpeed) + random(-0.01, 0.01)
@@ -22,18 +23,55 @@ class Box {
   }
 
   move() {
-    if (this.vel.x < this.minSpeed) {
-      this.vel.x = this.minSpeed;
+    // if x negative, make sure its not too slow or fast
+    if (this.vel.x < 0) {
+      if (this.vel.x < this.minSpeed - 0.2) {
+        this.vel.x = this.minSpeed;
+      }
+      if (this.vel.x > this.minSpeed + 1.2) {
+        this.vel.x = this.minSpeed + 1;
+      }
     }
-    if (this.vel.y < this.minSpeed) {
-      this.vel.y = this.minSpeed;
+
+    // if x positive, make sure its not too slow or fast
+    if (this.vel.x > 0) {
+      if (this.vel.x > this.maxSpeed + 0.2) {
+        this.vel.x = this.maxSpeed;
+      }
+      if (this.vel.x < this.maxSpeed - 1.2) {
+        this.vel.x = this.maxSpeed - 1;
+      }
     }
+
+    // if y negative, make sure its not too slow or fast
+    if (this.vel.y < 0) {
+      if (this.vel.y < this.minSpeed - 0.2) {
+        this.vel.y = this.minSpeed;
+      }
+      if (this.vel.y > this.minSpeed + 1.2) {
+        this.vel.y = this.minSpeed + 1;
+      }
+    }
+
+    // if y positive, make sure its not too slow or fast
+    if (this.vel.y > 0) {
+      if (this.vel.y > this.maxSpeed + 0.2) {
+        this.vel.y = this.maxSpeed;
+      }
+      if (this.vel.y < this.maxSpeed - 1.2) {
+        this.vel.y = this.maxSpeed - 1;
+      }
+    }
+
+    // do the move
     this.pos = p5.Vector.add(this.pos, this.vel);
   }
 
   hit() {
     var hitLR = false;
     var hitUD = false;
+
+    // check X bounds
     if (
       this.pos.x - this.size.x < 0 - this.size.x ||
       this.pos.x + this.size.x > width
@@ -43,6 +81,8 @@ class Box {
       this.pos.x = this.pos.x <= 0 + this.size.x ? 1 : width - this.size.x - 1;
       hitLR = true;
     }
+
+    // check Y bounds
     if (
       this.pos.y - this.size.y < 0 - this.size.y ||
       this.pos.y + this.size.y > height
@@ -53,6 +93,7 @@ class Box {
       hitUD = true;
     }
 
+    // we hit the corner! special surprise :)
     if (hitLR && hitUD && this.detecting) {
       this.hitCount++;
       this.flashing = true;
@@ -63,25 +104,32 @@ class Box {
   update() {
     this.hit();
     this.move();
-  }
 
-  show() {
+    // counter is up
     if (this.counter <= 0) {
       this.counter = 6000;
       this.flashing = false;
       this.detecting = true;
     }
+  }
+
+  show() {
+    // flashing reward for corner hit!
     if (this.flashing) {
       colorMode(HSB);
       tint(this.tint, 200, 255);
       this.tint = this.tint <= 1 ? (this.tint = 255) : (this.tint -= 10);
       this.counter -= 60;
-    } else {
+    }
+    // flashing is done
+    else {
       noTint();
     }
 
+    // draw the maggles
     image(this.img, this.pos.x, this.pos.y, this.size.x, this.size.y);
-    
+
+    // draw the counter so we know how many happened
     if (this.hitCount > 0) {
       textSize(32);
       fill(255);
