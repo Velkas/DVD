@@ -2,7 +2,7 @@ let box;
 let img;
 
 function preload() {
-  img = loadImage("maggie_dvd.png");
+  img = loadImage("maggie_blink.gif");
 }
 
 function setup() {

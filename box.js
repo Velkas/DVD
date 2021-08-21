@@ -8,6 +8,7 @@ class Box {
     this.minSpeed = -4;
     this.tint = 127;
     this.counter = 6000;
+    this.blinkCounter = 30000;
     // starting direction should be random
     this.vel = createVector(
       random(1) >= 0.5
@@ -19,7 +20,6 @@ class Box {
     );
     this.flashing = false;
     this.detecting = true;
-    print(this.vel);
   }
 
   move() {
@@ -101,11 +101,22 @@ class Box {
     }
   }
 
+  blink() {
+    if (this.blinkCounter <= 0) {
+      this.img.reset();
+      this.blinkCounter = 30000;
+      print("blinking");
+    }
+
+    this.blinkCounter -= 60;
+  }
+
   update() {
     this.hit();
     this.move();
+    this.blink();
 
-    // counter is up
+    // flash counter is up
     if (this.counter <= 0) {
       this.counter = 6000;
       this.flashing = false;
