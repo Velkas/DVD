@@ -3,15 +3,16 @@ class Box {
     this.pos = createVector(x, y);
     this.img = img;
     this.size = createVector(this.img.width, this.img.height);
-    this.maxSpeed = 10;
-    this.minSpeed = -9;
+    this.hitCount = 0;
+    this.maxSpeed = 8;
+    this.minSpeed = -6;
     this.vel = createVector(
       random(1) >= 0.5
-        ? random(8, 10) + random(-0.01, 0.01)
-        : -random(8, 10) + random(-0.01, 0.01),
+        ? random(this.minSpeed * -1, this.maxSpeed) + random(-0.01, 0.01)
+        : -random(this.minSpeed * -1, this.maxSpeed) + random(-0.01, 0.01),
       random(1) >= 0.5
-        ? random(8, 10) + random(-0.01, 0.01)
-        : -random(8, 10) + random(-0.01, 0.01)
+        ? random(this.minSpeed * -1, this.maxSpeed) + random(-0.01, 0.01)
+        : -random(this.minSpeed * -1, this.maxSpeed) + random(-0.01, 0.01)
     );
     print(this.vel);
   }
@@ -27,6 +28,8 @@ class Box {
   }
 
   hit() {
+    var hitLR = false;
+    var hitUD = false;
     if (
       this.pos.x - this.size.x < 0 - this.size.x ||
       this.pos.x + this.size.x > width
@@ -34,6 +37,7 @@ class Box {
       this.vel.x *= -1;
       this.vel.x += random(-0.1, 0.1);
       this.pos.x = this.pos.x <= 0 + this.size.x ? 1 : width - this.size.x - 1;
+      hitLR = true;
     }
     if (
       this.pos.y - this.size.y < 0 - this.size.y ||
@@ -42,6 +46,11 @@ class Box {
       this.vel.y *= -1;
       this.vel.y += random(-0.1, 0.1);
       this.pos.y = this.pos.y - this.size.y < 0 ? 1 : height - this.size.y - 1;
+      hitUD = true;
+    }
+
+    if (hitLR && hitUD) {
+      this.hitCount++;
     }
   }
 
@@ -52,5 +61,10 @@ class Box {
 
   show() {
     image(this.img, this.pos.x, this.pos.y, this.size.x, this.size.y);
+    textSize(28);
+    fill(255);
+    strokeWeight(4);
+    stroke(0);
+    text(this.hitCount, this.pos.x + 10, this.pos.y + 32);
   }
 }
