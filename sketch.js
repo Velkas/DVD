@@ -13,6 +13,8 @@ function setup() {
 }
 
 function draw() {
+  colorMode(RGB);
+
   background(0, 255, 0);
 
   box.update();
