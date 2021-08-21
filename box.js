@@ -6,8 +6,12 @@ class Box {
     this.maxSpeed = 10;
     this.minSpeed = -9;
     this.vel = createVector(
-      random(1) >= 0.5 ? random(8, 10) : -random(8, 10),
-      random(1) >= 0.5 ? random(8, 10) : -random(8, 10)
+      random(1) >= 0.5
+        ? random(8, 10) + random(-0.01, 0.01)
+        : -random(8, 10) + random(-0.01, 0.01),
+      random(1) >= 0.5
+        ? random(8, 10) + random(-0.01, 0.01)
+        : -random(8, 10) + random(-0.01, 0.01)
     );
     print(this.vel);
   }
