@@ -20,13 +20,11 @@ function setup() {
   emitters.push(new Emitter(width, height, createVector(-emitterSpeed, -emitterSpeed))); // bottom right
 
   // add the one true maggs
-  box = new Box(width / 2, height / 2, img);
+  box = new Box(random(width / 3, width / 4), random(height / 3, height / 4), img);
 }
 
 function draw() {
-  colorMode(RGB);
   clear();
-  //background(0, 0, 0, 0);
 
   box.update();
   box.show();
@@ -39,4 +37,14 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+
+  box = null;
+  emitters = [];
+
+  emitters.push(new Emitter(0, 0, createVector(emitterSpeed, emitterSpeed))); // top left
+  emitters.push(new Emitter(width, 0, createVector(-emitterSpeed, emitterSpeed))); // top right
+  emitters.push(new Emitter(0, height, createVector(emitterSpeed, -emitterSpeed))); // bottom left
+  emitters.push(new Emitter(width, height, createVector(-emitterSpeed, -emitterSpeed))); // bottom right
+
+  box = new Box(random(width / 3, width / 4), random(height / 3, height / 4), img);
 }

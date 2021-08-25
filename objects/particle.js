@@ -5,7 +5,7 @@ class Particle {
     this.vel.mult(random(2, 5));
     this.acc = createVector(0, 0);
     this.r = random(4, 8);
-    this.rMod = random(2, 4);
+    this.rMod = createVector(random(2, 4), random(2, 4));
     this.lifetime = 500;
     this.color = random(255);
     this.rot = random(0, 20);
@@ -48,6 +48,6 @@ class Particle {
     noStroke();
     fill(this.color, 255, 255, map(this.lifetime, 0, 500, 0.01, 1)); //, this.lifetime);
 
-    rect(this.pos.x, this.pos.y, this.r * this.rMod, this.r * this.rMod);
+    rect(this.pos.x, this.pos.y, this.r * this.rMod.x, this.r * this.rMod.y);
   }
 }
