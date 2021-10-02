@@ -4,7 +4,7 @@ let emitters = [];
 let emitterSpeed = 0.2;
 
 function preload() {
-  img = loadImage("assets/maggie_blink.gif");
+  img = loadImage("assets/Maggie_blink.gif");
 }
 
 function setup() {

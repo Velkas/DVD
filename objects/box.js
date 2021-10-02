@@ -4,8 +4,9 @@ class Box {
     this.img = img;
     this.size = createVector(this.img.width, this.img.height);
     this.hitCount = 0;
-    this.maxSpeed = 3;
+    this.maxSpeed = 2;
     this.minMaxOffset = 0.25;
+    this.maxSpeedDiff = 1;
     this.randJitter = 0.2;
     this.tint = 127;
     this.flashCounter = 8000;
@@ -26,35 +27,26 @@ class Box {
 
   move() {
     // clamp the values in a donut shape so its never too slow or too fast
-    if (this.vel.x >= 0) {
-      this.vel.x = this.clamp(
-        this.vel.x,
-        this.maxSpeed - this.maxSpeed * this.minMaxOffset,
-        this.maxSpeed + this.maxSpeed * this.minMaxOffset
-      );
-    } else {
-      this.vel.x = this.clamp(
-        Math.abs(this.vel.x),
-        this.maxSpeed - this.maxSpeed * this.minMaxOffset,
-        this.maxSpeed + this.maxSpeed * this.minMaxOffset
-      );
-      this.vel.x *= -1;
-    }
+    let xClamp = this.clamp(
+      Math.abs(this.vel.x),
+      this.maxSpeed - this.maxSpeed * this.minMaxOffset,
+      this.maxSpeed + this.maxSpeed * this.minMaxOffset
+    );
+    this.vel.x < 0 ? (this.vel.x = xClamp * -1) : (this.vel.x = xClamp);
 
-    if (this.vel.y >= 0) {
-      this.vel.y = this.clamp(
-        this.vel.y,
-        this.maxSpeed - this.maxSpeed * this.minMaxOffset,
-        this.maxSpeed + this.maxSpeed * this.minMaxOffset
-      );
-    } else {
-      this.vel.y = this.clamp(
-        Math.abs(this.vel.y),
-        this.maxSpeed - this.maxSpeed * this.minMaxOffset,
-        this.maxSpeed + this.maxSpeed * this.minMaxOffset
-      );
-      this.vel.y *= -1;
-    }
+    let yClamp = this.clamp(
+      Math.abs(this.vel.y),
+      this.maxSpeed - this.maxSpeed * this.minMaxOffset,
+      this.maxSpeed + this.maxSpeed * this.minMaxOffset
+    );
+    this.vel.y < 0 ? (this.vel.y = yClamp * -1) : (this.vel.y = xClamp);
+
+    let xDeltaAdj = this.clamp(
+      Math.abs(this.vel.x),
+      Math.abs(this.vel.y) - this.maxSpeedDiff,
+      Math.abs(this.vel.y) + this.maxSpeedDiff
+    );
+    this.vel.x < 0 ? (this.vel.x = xDeltaAdj * -1) : (this.vel.x = xDeltaAdj);
 
     // do the move
     this.pos = p5.Vector.add(this.pos, this.vel);
