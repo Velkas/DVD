@@ -2,13 +2,14 @@ class Particle {
   constructor(x, y) {
     this.pos = createVector(x, y);
     this.vel = p5.Vector.random2D();
-    this.vel.mult(random(2, 5));
+    this.vel.mult(random(1, 3));
     this.acc = createVector(0, 0);
+    this.size = createVector(random(5, 8), random(8, 15));
     this.r = random(4, 8);
-    this.rMod = createVector(random(2, 4), random(2, 4));
-    this.lifetime = 500;
+    this.lifetime = random(400, 500);
     this.color = random(255);
     this.rot = random(0, 20);
+    this.fixedRot = random(PI);
   }
 
   finished() {
@@ -35,19 +36,24 @@ class Particle {
   }
 
   update() {
+    this.edges();
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
 
-    this.rot += 1;
-    this.lifetime -= 5;
+    this.rot += 0.1;
+    this.lifetime -= 7;
+    this.size.x = map(sin(this.rot), -1, 1, 4, 8);
   }
 
   show() {
+    push();
     colorMode(HSB);
     noStroke();
     fill(this.color, 255, 255, map(this.lifetime, 0, 500, 0.01, 1)); //, this.lifetime);
-
-    rect(this.pos.x, this.pos.y, this.r * this.rMod.x, this.r * this.rMod.y);
+    translate(this.pos.x, this.pos.y);
+    rotate(this.fixedRot);
+    rect(0, 0, this.size.x, this.size.y);
+    pop();
   }
 }

@@ -50,6 +50,9 @@ class Box {
 
     // do the move
     this.pos = p5.Vector.add(this.pos, this.vel);
+    if (this.manualControl) {
+      this.pos = createVector(mouseX - this.size.x / 2, mouseY - this.size.y / 2);
+    }
   }
 
   hit() {
@@ -82,6 +85,8 @@ class Box {
       this.corner[1] = hitR && hitU;
       this.corner[2] = hitL && hitD;
       this.corner[3] = hitR && hitD;
+
+      this.justHit = true;
     }
   }
 
@@ -119,7 +124,8 @@ class Box {
 
       for (let i in this.corner) {
         if (this.corner[i]) {
-          emitters[i].emit(5);
+          emitters[i].emit(random());
+          this.justHit = false;
         }
       }
     }

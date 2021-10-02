@@ -14,7 +14,8 @@ class Emitter {
 
   update() {
     for (let particle of this.particles) {
-      particle.applyForce(this.direction.mult(this.gravity));
+      let pgrav = this.direction.y < 0 ? -this.direction.y * this.gravity.y : this.direction.y * this.gravity.y;
+      particle.applyForce(this.direction.mult(this.gravity)); //createVector(this.direction.x * 0.9, this.direction.y * 0.9));
       particle.update();
     }
 

@@ -21,6 +21,7 @@ function setup() {
 
   // add the one true maggs
   box = new Box(random(width / 3, width / 4), random(height / 3, height / 4), img);
+  box.manualControl = false;
 }
 
 function draw() {
@@ -32,6 +33,15 @@ function draw() {
   for (let e of emitters) {
     e.update();
     e.show();
+  }
+}
+
+function mousePressed() {
+  if (
+    (mouseX > box.pos.x && mouseX < box.pos.x + box.size.x && mouseY > box.pos.y && mouseY < box.pos.y + box.size.y) ||
+    box.manualControl
+  ) {
+    box.manualControl = !box.manualControl;
   }
 }
 
