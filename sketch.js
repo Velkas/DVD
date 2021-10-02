@@ -20,7 +20,9 @@ function setup() {
   emitters.push(new Emitter(width, height, createVector(-emitterSpeed, -emitterSpeed))); // bottom right
 
   // add the one true maggs
-  box = new Box(random(width / 3, width / 4), random(height / 3, height / 4), img);
+  let boxSpawnX = random(5 + img.width, width - img.width - 5);
+  let boxSpawnY = random(5 + img.height, height - img.height - 5);
+  box = new Box(boxSpawnX, boxSpawnY, img);
   box.manualControl = false;
 }
 
